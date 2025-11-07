@@ -22,7 +22,10 @@ export function BlockPanel({}: BlockPanelProps) {
     setExpandedCategories(newExpanded)
   }
 
-  const onDragStart = (event: React.DragEvent, templateId: string) => {
+  const onDragStart = (
+    event: React.DragEvent<HTMLDivElement>,
+    templateId: string
+  ) => {
     event.dataTransfer.setData('application/reactflow', templateId)
     event.dataTransfer.effectAllowed = 'move'
   }
@@ -65,26 +68,29 @@ export function BlockPanel({}: BlockPanelProps) {
                 className="space-y-2 pl-4"
               >
                 {templates.map((template) => (
-                  <motion.div
+                  <div
                     key={template.id}
                     draggable
-                    onDragStart={(e) => onDragStart(e, template.id)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`lego-block ${template.type}-block p-3 cursor-grab active:cursor-grabbing`}
+                    onDragStart={(e) => onDragStart(e as React.DragEvent<HTMLDivElement>, template.id)}
                   >
-                    <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{template.icon}</span>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-sm truncate">
-                          {template.label}
-                        </h3>
-                        <p className="text-xs text-gray-600 truncate">
-                          {template.description}
-                        </p>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`lego-block ${template.type}-block p-3 cursor-grab active:cursor-grabbing`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">{template.icon}</span>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-medium text-sm truncate">
+                            {template.label}
+                          </h3>
+                          <p className="text-xs text-gray-600 truncate">
+                            {template.description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </div>
                 ))}
               </motion.div>
             )}
@@ -111,9 +117,3 @@ export function BlockPanel({}: BlockPanelProps) {
     </div>
   )
 }
-
-
-
-
-
-
