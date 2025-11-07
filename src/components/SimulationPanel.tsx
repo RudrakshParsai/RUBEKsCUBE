@@ -83,7 +83,7 @@ export function SimulationPanel({}: SimulationPanelProps) {
     addLog({
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),
-      level: 'success',
+      level: 'info',
       message: 'Simulation started successfully',
       source: 'System',
     })
@@ -309,7 +309,7 @@ export function SimulationPanel({}: SimulationPanelProps) {
                 <span className={`ml-2 ${
                   log.level === 'error' ? 'text-red-400' :
                   log.level === 'warning' ? 'text-yellow-400' :
-                  log.level === 'success' ? 'text-green-400' :
+                  log.level === 'info' ? 'text-green-400' :
                   'text-blue-400'
                 }`}>
                   [{log.level.toUpperCase()}]
